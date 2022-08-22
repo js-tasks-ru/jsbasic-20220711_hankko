@@ -2,13 +2,13 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class CartIcon {
   constructor() {
+    this.cart;
     this.render();
-
     this.addEventListeners();
   }
 
   render() {
-    this.elem = createElement('<div class="cart-icon"></div>');
+    this.elem = createElement('<div class="cart-icon"></div>');  
   }
 
   update(cart) {
@@ -22,7 +22,6 @@ export default class CartIcon {
         </div>`;
 
       this.updatePosition();
-
       this.elem.classList.add('shake');
       this.elem.addEventListener('transitionend', () => {
         this.elem.classList.remove('shake');
@@ -39,6 +38,39 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    // ваш код ...
+
+    const initialTopCoord = 50;
+
+    if (window.pageYOffset > initialTopCoord) {
+      let leftIndent = Math.min(
+        document.querySelector('.container').getBoundingClientRect().right + 20,
+        document.documentElement.clientWidth - this.elem.offsetWidth - 10) + 'px';
+
+      Object.assign(this.elem.style, {
+        position: 'fixed',
+        top: '50px',
+        zIndex: 1e3,
+        right: '10px',
+        left: leftIndent
+      });
+    } else {
+      Object.assign(this.elem.style, {
+        position: '',
+        top: '',
+        left: '',
+        zIndex: ''
+      });
+    }
+
+    let isMobile = document.documentElement.clientWidth <= 767;
+
+    if (document.documentElement.clientWidth <= 767) {
+      Object.assign(this.elem.style, {
+        position: '',
+        top: '',
+        left: '',
+        zIndex: ''
+      });
+    };
   }
 }
