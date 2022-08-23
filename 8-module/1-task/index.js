@@ -38,10 +38,7 @@ export default class CartIcon {
   }
 
   updatePosition() {
-
-    const initialTopCoord = 50;
-
-    if (window.pageYOffset > initialTopCoord) {
+    if (window.pageYOffset) {
       let leftIndent = Math.min(
         document.querySelector('.container').getBoundingClientRect().right + 20,
         document.documentElement.clientWidth - this.elem.offsetWidth - 10) + 'px';
@@ -61,16 +58,5 @@ export default class CartIcon {
         zIndex: ''
       });
     }
-
-    let isMobile = document.documentElement.clientWidth <= 767;
-
-    if (document.documentElement.clientWidth <= 767) {
-      Object.assign(this.elem.style, {
-        position: '',
-        top: '',
-        left: '',
-        zIndex: ''
-      });
-    };
   }
 }

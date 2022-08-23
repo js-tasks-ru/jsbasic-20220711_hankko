@@ -1,3 +1,5 @@
+7/4
+
 export default class StepSlider {
   constructor({ steps, value = 0 }) {
     this.steps = steps;
@@ -71,11 +73,10 @@ export default class StepSlider {
     event.preventDefault();
     let shiftX = event.clientX - this.elem.getBoundingClientRect().left; 
     let leftRelative = shiftX / this.elem.offsetWidth;
-    if (leftRelative < 0) {
-      leftRelative = 0;
-    } if (leftRelative > 1) {
-      leftRelative = 1;
-    }
+
+    if (leftRelative < 0) {leftRelative = 0;} 
+    if (leftRelative > 1) {leftRelative = 1;}
+
     let leftPercents = leftRelative * 100;
     const segments = this.steps - 1;
     const approximateValue = Math.round(leftRelative * segments); 
@@ -89,9 +90,10 @@ export default class StepSlider {
 
     const sliderThumb = this.elem.querySelector('.slider__thumb');
     sliderThumb.style.left = `${leftPercents}%`;
+
     const slider = document.querySelector('.slider');
-    console.log(slider);
     slider.classList.add('slider_dragging');
+
     const sliderProgress = this.elem.querySelector('.slider__progress');
     sliderProgress.style.width = `${leftPercents}%`;
 
@@ -104,11 +106,10 @@ export default class StepSlider {
   onThumbMove = (event) => {
     const shiftX = event.clientX - this.elem.getBoundingClientRect().left; 
     let leftRelative = shiftX / this.elem.offsetWidth;
-    if (leftRelative < 0) {
-      leftRelative = 0;
-    } if (leftRelative > 1) {
-      leftRelative = 1;
-    }
+    
+    if (leftRelative < 0) {leftRelative = 0;} 
+    if (leftRelative > 1) {leftRelative = 1;}
+    
     let leftPercents = leftRelative * 100;
     const segments = this.steps - 1;
     const approximateValue = Math.round(leftRelative * segments); 
@@ -132,11 +133,10 @@ export default class StepSlider {
   onThumbUp = (event) => {
     let shiftX = (event.clientX) - this.elem.getBoundingClientRect().left; 
     let leftRelative = shiftX / this.elem.offsetWidth;
-    if (leftRelative < 0) {
-      leftRelative = 0;
-    } if (leftRelative > 1) {
-      leftRelative = 1;
-    }
+    
+    if (leftRelative < 0) {leftRelative = 0;} 
+    if (leftRelative > 1) {leftRelative = 1;}
+    
     let leftPercents = leftRelative * 100;
     const segments = this.steps - 1;
     const approximateValue = Math.round(leftRelative * segments); 
@@ -150,8 +150,10 @@ export default class StepSlider {
 
     const sliderThumb = this.elem.querySelector('.slider__thumb');
     sliderThumb.style.left = `${leftPercents}%`;
+
     const slider = document.querySelector('.slider');
     slider.classList.remove('slider_dragging');
+    
     const sliderProgress = this.elem.querySelector('.slider__progress');
     sliderProgress.style.width = `${leftPercents}%`;
 
@@ -168,3 +170,4 @@ export default class StepSlider {
       this.elem.dispatchEvent(sliderChange);
   }
 }
+
